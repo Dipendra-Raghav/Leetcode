@@ -1,13 +1,13 @@
 class Solution {
 public:
-    static bool comp(const vector<int>& a, const vector<int>& b){
-        if(a[0]==b[0]){
-            return a[1]>b[1];
-        }
-        return a[0]<b[0];
-    }
+    // static bool comp(const vector<int>& a, const vector<int>& b){
+    //     if(a[0]==b[0]){
+    //         return a[1]>b[1];
+    //     }
+    //     return a[0]<b[0];
+    // }
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        sort(intervals.begin(),intervals.end(),comp);
+        sort(intervals.begin(),intervals.end());
         vector<vector<int>> ans;
         int p=0;
         int q=0;
