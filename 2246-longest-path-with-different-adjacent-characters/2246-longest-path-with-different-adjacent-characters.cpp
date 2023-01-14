@@ -1,29 +1,32 @@
 class Solution {
 public:
-    int dfs(vector<vector<int>>& x,int& mx,int i,string& s){
-        if(x[i].size()==0) return 1;
-        vector<int> e;
-        int mx1=0,mx2=0;
-        for(int j=0;j<x[i].size();j++){
-            int a = dfs(x,mx,x[i][j],s);
-            if(s[x[i][j]]==s[i]) a=0;
-            if(a>mx1){
-                mx2=mx1;
-                mx1=a;
-            }
-            else if(a>mx2) mx2=a;
-        }
-        mx=max(mx,mx1+mx2+1);
-        return mx1+1;
+   
+    int maxi2=0;
+    int solve(string &s,vector<vector<int>> &adj,int k)
+    {
+        int maxi=0;
+        int ans=0;
+         for(int i=0;i<adj[k].size();i++)
+         {
+             
+             ans=1+solve(s,adj,adj[k][i]);
+             if(s[k]!=s[adj[k][i]])
+             {
+                 if(maxi2< maxi+ans)maxi2=maxi+ans;
+                 maxi=max(maxi,ans);
+                
+             }
+             ans=0;     
+         }
+        return maxi;
     }
-
-    int longestPath(vector<int>& par, string s) {
-        int n=par.size(),mx=1;
-        vector<vector<int>> x(n,vector<int>());
-        for(int i=0;i<n;i++){
-            if(par[i]!=-1) x[par[i]].push_back(i);
+    int longestPath(vector<int>& parent, string s) {
+        vector<vector<int>> adj(parent.size());
+        for(int i=1;i<parent.size();i++)
+        {
+            adj[parent[i]].push_back(i);
         }
-        dfs(x,mx,0,s);
-        return mx;
+        solve(s,adj,0);
+        return maxi2+1;
     }
 };
