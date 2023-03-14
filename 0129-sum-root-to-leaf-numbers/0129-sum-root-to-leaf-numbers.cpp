@@ -12,25 +12,22 @@
 class Solution {
 public:
     int ans=0;
-    void solve(TreeNode* root,int n,int i)
+    void solve(TreeNode* node,int sum,int k)
     {
-        if(root==NULL)return;
-        if(root->left==NULL && root->right==NULL)
+        if(node==NULL)return;
+        if(node->left==NULL && node->right==NULL)
         {
-            n=n*10+root->val;
-            ans+=n;
-            return;
+            sum=sum*10+node->val;
+            ans+=sum;
+            return ;
         }
-        
-        n=n*10+root->val;
-        solve(root->left,n,i+1);
-        solve(root->right,n,i+1);
-        return;
-        
+        sum=sum*10+node->val;
+        solve(node->left,sum,k+1);
+        solve(node->right,sum,k+1);
+        return ;
     }
     int sumNumbers(TreeNode* root) {
         solve(root,0,0);
         return ans;
-        
     }
 };
