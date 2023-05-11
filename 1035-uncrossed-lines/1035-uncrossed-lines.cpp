@@ -4,16 +4,10 @@ public:
     {
         if(i>=nums1.size() || j>=nums2.size())return 0;
         if(dp[i][j]!=-1)return dp[i][j];
-        if(nums1[i]==nums2[j])
+        if(nums1[i]==nums2[j] && j>prev)
         {
-            int b=solve(nums1,nums2,i,j+1,prev,dp);
-            int a=0;
-            if(j>prev)
-            {
-                prev=j;
-                a=1+solve(nums1,nums2,i+1,j+1,prev,dp);
-            }
-            return dp[i][j]=max(a,b);
+            prev=j;
+            return dp[i][j] =1+solve(nums1,nums2,i+1,j+1,prev,dp);
         }
         else
         {
