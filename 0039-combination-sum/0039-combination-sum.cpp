@@ -24,19 +24,14 @@ public:
             res.push_back(nums[i]);
             solve(nums,target,i,res);
             res.pop_back();
-            int x=nums[i];
-           
-            while(i+1<nums.size() && nums[i+1]==x)
-            {
-                i++;
-            }
-           
+            
+          
         }
         
         
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        sort(candidates.begin(),candidates.end());
+       
         vector<int> res;
         solve(candidates,target,0,res);
         return ans;
