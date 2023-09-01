@@ -20,25 +20,6 @@ public:
         }
         return {i+1,j-1};
     }
-    pair<int,int> chkEven(string s,int i,int j)
-    {
-        
-        int ans=0;
-        if(i<0 || j>s.size() )return {i+1,j-1};
-        while(i>=0 && j<s.size())
-        {
-            if(s[i]==s[j])
-            {
-                ans+=2;
-                i--;
-                j++;
-            }
-            else
-                break;
-
-        }
-        return {i+1,j-1};
-    }
     string longestPalindrome(string s) {
       
         pair<int,int> ans;
@@ -51,7 +32,7 @@ public:
             
             if(i+1<s.size()&&s[i+1]==s[i])
             {
-                q=chkEven(s,i-1,i+2);
+                q=chkOdd(s,i-1,i+2);
                
             }
             
