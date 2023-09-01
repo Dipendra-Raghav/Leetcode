@@ -46,7 +46,7 @@ public:
         for(int i=0;i<s.size();i++)
         {
             pair<int,int> p=chkOdd(s,i-1,i+1);
-            cout<<p.first<<" "<<p.second<<" ";
+           
             pair<int,int> q={0,0};
             
             if(i+1<s.size()&&s[i+1]==s[i])
@@ -54,7 +54,7 @@ public:
                 q=chkEven(s,i-1,i+2);
                
             }
-            cout<<q.first<<" "<<q.second<<endl;
+            
             int oddLength = (p.second - p.first)+1;
             int evenLength = (q.second - q.first)+1;
             if(mx<max(oddLength,evenLength))
@@ -73,7 +73,7 @@ public:
                 }
             
             }
-            cout<<endl;
+           
         }
         int i=ans.first;
         int j=ans.second;
