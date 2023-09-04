@@ -1,34 +1,45 @@
 class Solution {
 public:
-    int minDistance(string word1, string word2) {
-        int m=word1.size();
-        int n=word2.size();
-        int dp[m+1][n+1];
-        for(int i=0;i<=m;i++)
+    int solve(string word1,string word2,int i,int j,vector<vector<int>> &dp)
+    {
+        if(i>=word1.size() && j>=word2.size())
+            return 0;
+        
+        if(i>=word1.size())
         {
-            dp[i][0]=i;
+            return word2.size()-j;
         }
-        for(int j=0;j<=n;j++)
+        if(j>=word2.size())
         {
-            dp[0][j]=j;
-
+            return word1.size()-i;
+        }
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        
+        
+        int a=INT_MAX;
+        int b=INT_MAX;
+        int c=INT_MAX;
+        int d=INT_MAX;
+        //go on
+        if(word1[i]==word2[j])
+        {
+            a=solve(word1,word2,i+1,j+1,dp);
         }
         
-        for(int i=1;i<=m;i++)
         {
-            for(int j=1;j<=n;j++)
-            {
-                if(word1[i-1]==word2[j-1])
-                {
-                    dp[i][j]=dp[i-1][j-1];
-                    
-                }
-                else 
-                {   int mini=min(dp[i-1][j],dp[i][j-1]);
-                    dp[i][j]=1+ min(dp[i-1][j-1],mini);
-                }
-            }
+            //replace
+            b=1+solve(word1,word2,i+1,j+1,dp);
+            //delete
+            c=1+solve(word1,word2,i+1,j,dp);
+            //insert
+            d=1+solve(word1,word2,i,j+1,dp);
         }
-        return dp[m][n];
+        return dp[i][j]=min(a,min(b,min(c,d)));
+        
+    }
+    int minDistance(string word1, string word2) {
+        vector<vector<int>> dp(word1.size(),vector<int>(word2.size(),-1));
+        return solve(word1,word2,0,0,dp);
     }
 };
