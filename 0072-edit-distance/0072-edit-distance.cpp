@@ -27,6 +27,7 @@ public:
             a=solve(word1,word2,i+1,j+1,dp);
         }
         
+        else
         {
             //replace
             b=1+solve(word1,word2,i+1,j+1,dp);
