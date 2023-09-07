@@ -1,47 +1,38 @@
 class Solution {
 public:
-    bool dfs(vector<int> list[],vector<int> &vis,vector<int> &path,int i)
+    bool solve(vector<int> nums[],vector<int> &vis,vector<int> &path,int j)
     {
-        vis[i]=1;
-        path[i]=1;
-        for(auto it:list[i])
+        vis[j]=1;
+        path[j]=1;
+        for(int i=0;i<nums[j].size();i++)
         {
-            
-            if(vis[it]==0)
+            if(path[nums[j][i]]==1)return false;
+            else if(vis[nums[j][i]]==-1)
             {
-                if(dfs(list,vis,path,it)==true)return true;
+                if(solve(nums,vis,path,nums[j][i])==false)return false;
             }
-            else if(path[it])
-            {
-                return true;
-            }
-            
         }
-        path[i]=0;
-        return false;
+        path[j]=-1;
+        return true;
     }
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        int n=numCourses;
-        vector<int> list[n];
-        vector<int> vis(n,0);
-        vector<int> path(n,0);
-
-        for(auto it: prerequisites)
+    bool canFinish(int n, vector<vector<int>>& pre) {
+        vector<int> nums[n];
+        for(int i=0;i<pre.size();i++)
         {
-            list[it[1]].push_back(it[0]);
+            nums[pre[i][1]].push_back(pre[i][0]);
         }
+        vector<int> vis(n,-1);
+        vector<int> path(n,-1);
         
         for(int i=0;i<n;i++)
         {
-            if(vis[i]==0)
+            if(vis[i]==-1)
             {
-                if(dfs(list,vis,path,i)==true)return false;
+                if(solve(nums,vis,path,i)==false)return false;
             }
+            
         }
         return true;
-       
-        
-        
         
     }
 };
