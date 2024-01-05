@@ -12,9 +12,9 @@ public:
             }
             dp[i]=mx+1;
         }
-       // for(int i=0;i<dp.size();i++)cout<<dp[i]<<" ";
-        sort(dp.begin(),dp.end());
-        return dp[dp.size()-1];
+        int mx=0;
+        for(int i=0;i<dp.size();i++)mx=max(mx,dp[i]);
+        return mx;
         
     }
 };
