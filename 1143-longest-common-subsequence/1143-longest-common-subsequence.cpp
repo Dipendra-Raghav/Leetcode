@@ -19,7 +19,7 @@ public:
                 dp[i][j]=max(take,ntake);
             }
         }
-        return dp[n+1][m+1]-1;
+        return dp[n][m];
         
     }
 };
