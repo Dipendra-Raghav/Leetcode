@@ -10,11 +10,11 @@ public:
         for(int i=0;i<nums.size();i++)
         {
             //include
-            if(nums[i]!=-16161)
+            if(nums[i]!=INT_MIN)
             {
                 ans.push_back(nums[i]);
                 int t=nums[i];
-                nums[i]=-16161;
+                nums[i]=INT_MIN;
                 solve(nums,res,ans);
                 ans.pop_back();
                 nums[i]=t;
